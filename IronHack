@@ -1,0 +1,85 @@
+// Mars Rover Kata
+let rover = {
+  direction: "N",
+  x: 0,
+  y: 0,
+  travelLog: ["x: 0, y:0",]
+};
+
+// turn left
+function turnLeft(rover){
+  console.log("turnLeft was called!");
+  switch(rover.direction) {
+    case "N":
+      rover.direction = "W";
+      break;
+    case "W":
+      rover.direction = "S";
+      break;
+    case "S":
+      rover.direction = "E";
+    case "E":
+      rover.direction = "N";
+      break;
+  }
+  return;
+}
+//turn right
+function turnRight(rover){
+  console.log("turnRight was called!");
+  switch(rover.direction) {
+    case "N":
+      rover.direction = "E";
+      break;
+    case "E":
+      rover.direction = "S";
+      break;
+    case "S":
+      rover.direction = "W";
+    case "W":
+      rover.direction = "N";
+      break;
+  }
+  return;
+}
+//move forward
+function moveForward(rover){
+  console.log("moveForward was called");
+  switch(rover.direction){
+    case "N":
+      rover.y--;
+      break;
+    case "E":
+      rover.x++;
+      break;
+    case "S":
+      rover.y++;
+      break;
+    case "W":
+      rover.x--;
+      break;
+  }
+  console.log("rover's new position is x:" + rover.x + ", " + "y:" + rover.y );
+rover.travelLog.push("x:" + rover.x + " y:" + rover.y);
+}
+//command function
+function command(rover, orders){
+ 
+  for (let i = 0; i < orders.length; i++){
+    let order = orders[i];
+    switch(order){
+      case "l": // left
+        turnLeft(rover);
+        continue;
+      case "r": // right
+        turnRight(rover);
+        continue;  
+      case "f": // forward
+        moveForward(rover);
+        continue; 
+    }
+  }
+  console.log(rover.travelLog);
+}
+//command input
+command(rover, "rffrfflfrff");
